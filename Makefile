@@ -1,4 +1,4 @@
-PLUGIN_NAME = hello_world
+PLUGIN_NAME = double
 LV2_DIR = ${HOME}/.lv2/
 CFLAGS = `pkg-config --cflags lv2` -fPIC -DPIC -Wall -Wextra
 LDFLAGS = `pkg-config --libs lv2` -shared

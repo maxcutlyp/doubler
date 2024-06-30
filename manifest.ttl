@@ -2,8 +2,8 @@
 @prefix lv2: <http://lv2plug.in/ns/lv2core#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 
-<http://example.com/helloworld>
+<http://maxcutlyp.com/doubler>
     a lv2:Plugin ;
-    doap:name "your mom lol" ;
-    lv2:binary <hello_world.so> ;
-    rdfs:seeAlso <hello_world.ttl> .
+    doap:name "Doubler" ;
+    lv2:binary <double.so> ;
+    rdfs:seeAlso <double.ttl> .

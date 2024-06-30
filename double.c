@@ -2,7 +2,7 @@
 #include <stdio.h>
 #include <lv2/core/lv2.h>
 
-#define URI "http://example.com/helloworld"
+#define URI "http://maxcutlyp.com/doubler"
 
 #define MAX_SKIP_MS 500
 

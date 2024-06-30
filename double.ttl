@@ -2,7 +2,7 @@
 @prefix foaf: <http://xmlns.com/foaf/0.1/> .
 @prefix units: <http://lv2plug.in/ns/extensions/units#> .
 
-<http://example.com/helloworld>
+<http://maxcutlyp.com/doubler>
     a lv2:Plugin ;
     lv2:optionalFeature <http://lv2plug.in/ns/ext/options#options> ;
     lv2:port [
@@ -36,5 +36,5 @@
         units:unit units:ms ;
     ] ;
     foaf:maker [
-        foaf:name "swag lord 69" ;
+        foaf:name "Max Cutlyp" ;
     ] .
