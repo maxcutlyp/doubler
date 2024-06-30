@@ -90,6 +90,14 @@ static void activate(LV2_Handle instance) {
 
 static void run(LV2_Handle instance, uint32_t n_samples) {
     HelloWorld *plugin = (HelloWorld *)instance;
+
+    if (*plugin->delay_ms == 0) {
+        for (uint32_t i = 0; i < n_samples; i++) {
+            plugin->output[i] = plugin->input[i];
+        }
+        return;
+    }
+
     plugin->overflow.length = plugin->rate * (*plugin->delay_ms) * 0.001;
 
     for (uint32_t i = 0; i < n_samples; i++) {
