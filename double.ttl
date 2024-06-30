@@ -1,9 +1,17 @@
 @prefix lv2: <http://lv2plug.in/ns/lv2core#> .
 @prefix foaf: <http://xmlns.com/foaf/0.1/> .
 @prefix units: <http://lv2plug.in/ns/extensions/units#> .
+@prefix doap: <http://usefulinc.com/ns/doap#> .
+
+<http://maxcutlyp.com#me>
+	a foaf:Person;
+	foaf:name "Max Cutlyp";
+	foaf:mbox <mailto:max@maxcutlyp.com>;
+	foaf:homepage <http://maxcutlyp.com/> .
 
 <http://maxcutlyp.com/doubler>
     a lv2:Plugin ;
+    doap:maintainer <http://maxcutlyp.com#me> ;
     lv2:optionalFeature <http://lv2plug.in/ns/ext/options#options> ;
     lv2:port [
         a lv2:InputPort, lv2:AudioPort ;
@@ -34,7 +42,4 @@
         lv2:minimum 0 ;
         lv2:maximum 500 ;
         units:unit units:ms ;
-    ] ;
-    foaf:maker [
-        foaf:name "Max Cutlyp" ;
     ] .
