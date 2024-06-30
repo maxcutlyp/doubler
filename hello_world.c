@@ -40,8 +40,10 @@ void rb_free(RingBuffer *rb) {
 
 
 typedef struct {
-    float *input;
-    float *output;
+    float *left_input;
+    float *right_input;
+    float *left_output;
+    float *right_output;
     float *delay_ms;
     double rate;
     RingBuffer overflow;
@@ -73,12 +75,18 @@ static void connect_port(
     HelloWorld *plugin = (HelloWorld *)instance;
     switch (port) {
         case 0: {
-            plugin->input = (float *)data_location;
+            plugin->left_input = (float *)data_location;
         }; break;
         case 1: {
-            plugin->output = (float *)data_location;
+            plugin->right_input = (float *)data_location;
         }; break;
         case 2: {
+            plugin->left_output = (float *)data_location;
+        }; break;
+        case 3: {
+            plugin->right_output = (float *)data_location;
+        }; break;
+        case 4: {
             plugin->delay_ms = (float *)data_location;
         }; break;
     }
@@ -93,7 +101,8 @@ static void run(LV2_Handle instance, uint32_t n_samples) {
 
     if (*plugin->delay_ms == 0) {
         for (uint32_t i = 0; i < n_samples; i++) {
-            plugin->output[i] = plugin->input[i];
+            plugin->left_output[i] = plugin->left_input[i];
+            plugin->right_output[i] = plugin->right_input[i];
         }
         return;
     }
@@ -101,8 +110,9 @@ static void run(LV2_Handle instance, uint32_t n_samples) {
     plugin->overflow.length = plugin->rate * (*plugin->delay_ms) * 0.001;
 
     for (uint32_t i = 0; i < n_samples; i++) {
-        plugin->output[i] = rb_get(&plugin->overflow) + plugin->input[i];
-        rb_push(&plugin->overflow, plugin->input[i]);
+        plugin->left_output[i] = rb_get(&plugin->overflow);
+        plugin->right_output[i] = plugin->right_input[i];
+        rb_push(&plugin->overflow, plugin->left_input[i]);
     }
 }
 

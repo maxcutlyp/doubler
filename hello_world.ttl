@@ -7,19 +7,29 @@
     lv2:optionalFeature <http://lv2plug.in/ns/ext/options#options> ;
     lv2:port [
         a lv2:InputPort, lv2:AudioPort ;
-        lv2:symbol "input" ;
-        lv2:name "Input" ;
+        lv2:symbol "left_input" ;
+        lv2:name "Left input" ;
         lv2:index 0
     ], [
-        a lv2:OutputPort, lv2:AudioPort ;
-        lv2:symbol "output" ;
-        lv2:name "Output" ;
+        a lv2:InputPort, lv2:AudioPort ;
+        lv2:symbol "right_input" ;
+        lv2:name "Right input" ;
         lv2:index 1
+    ], [
+        a lv2:OutputPort, lv2:AudioPort ;
+        lv2:symbol "left_output" ;
+        lv2:name "Left Output" ;
+        lv2:index 2
+    ], [
+        a lv2:OutputPort, lv2:AudioPort ;
+        lv2:symbol "right_output" ;
+        lv2:name "Right Output" ;
+        lv2:index 3
     ], [
         a lv2:InputPort, lv2:ControlPort ;
         lv2:symbol "delay_ms" ;
         lv2:name "Delay (ms)" ;
-        lv2:index 2 ;
+        lv2:index 4 ;
         lv2:default 10 ;
         lv2:minimum 0 ;
         lv2:maximum 500 ;
