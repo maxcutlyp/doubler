@@ -4,7 +4,7 @@
 
 #define URI "http://example.com/helloworld"
 
-#define SKIP_MS 10
+#define MAX_SKIP_MS 500
 
 typedef struct {
     float *buf;
@@ -42,6 +42,7 @@ void rb_free(RingBuffer *rb) {
 typedef struct {
     float *input;
     float *output;
+    float *delay_ms;
     double rate;
     RingBuffer overflow;
 } HelloWorld;
@@ -59,7 +60,7 @@ static LV2_Handle instantiate(
     HelloWorld *plugin = (HelloWorld *)malloc(sizeof(HelloWorld));
     plugin->rate = rate;
 
-    rb_init(&plugin->overflow, rate * SKIP_MS * 0.001);
+    rb_init(&plugin->overflow, rate * MAX_SKIP_MS * 0.001);
 
     return (LV2_Handle)plugin;
 }
@@ -77,6 +78,9 @@ static void connect_port(
         case 1: {
             plugin->output = (float *)data_location;
         }; break;
+        case 2: {
+            plugin->delay_ms = (float *)data_location;
+        }; break;
     }
 }
 
@@ -86,6 +90,7 @@ static void activate(LV2_Handle instance) {
 
 static void run(LV2_Handle instance, uint32_t n_samples) {
     HelloWorld *plugin = (HelloWorld *)instance;
+    plugin->overflow.length = plugin->rate * (*plugin->delay_ms) * 0.001;
 
     for (uint32_t i = 0; i < n_samples; i++) {
         plugin->output[i] = rb_get(&plugin->overflow) + plugin->input[i];

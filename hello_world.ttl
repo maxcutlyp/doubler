@@ -1,5 +1,6 @@
 @prefix lv2: <http://lv2plug.in/ns/lv2core#> .
 @prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix units: <http://lv2plug.in/ns/extensions/units#> .
 
 <http://example.com/helloworld>
     a lv2:Plugin ;
@@ -14,6 +15,15 @@
         lv2:symbol "output" ;
         lv2:name "Output" ;
         lv2:index 1
+    ], [
+        a lv2:InputPort, lv2:ControlPort ;
+        lv2:symbol "delay_ms" ;
+        lv2:name "Delay (ms)" ;
+        lv2:index 2 ;
+        lv2:default 10 ;
+        lv2:minimum 0 ;
+        lv2:maximum 500 ;
+        units:unit units:ms ;
     ] ;
     foaf:maker [
         foaf:name "swag lord 69" ;
